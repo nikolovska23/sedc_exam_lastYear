@@ -327,8 +327,7 @@ let newNovel = (() => {
         <td>${novels[novels.length - 1].review}</td>
         <td><button class="deleteBtn"> Delete </button></td>
         </tr>
-    `);
-})
+    `)
 
 
 
