@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+</head>
+
+<body>
+
+    <nav class="navbar-books">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <button id="newBookBtn" class="nav-link"> New Book</button>
+            </li>
+            <li class="nav-item">
+                <button id="listOfAllBooks" class="nav-link"> Book List</button>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="booklist">
+        <div id="listOfBooks" class="hidden">
+            <div class="col-sm-10 col-lg-6" border="1">
+                <button type="button" class="btn btn-primary" id="showBooks">Show All Books</button>
+                <button type="button" class="btn btn-primary" id="showNovels">Show Saved Novels</button>
+                <button type="button" class="btn btn-primary" id="showAnthologies">Show Saved Anthologies</button>
+            </div>
+        </div>
+    </section>
+
+    <button type="button" class="btn btn-primary " id="newBtn"> Enter new Book</button>
+    <form class="col-sm-10 col-lg-6 hidden" id="inputForm">
+
+
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Type Of Book</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="novel">
+                        <label class="form-check-label" for="gridRadios1">
+                            Novel
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="ant">
+                        <label class="form-check-label" for="gridRadios2">
+                            Anthology
+                        </label>
+                    </div>
+
+
+                </div>
+            </div>
+        </fieldset>
+        <!-- Form for NOVEL -->
+        <fieldset class="form-group" id="form-novel">
+            <!-- Title -->
+            <div class="form-group row">
+                <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputTitle" placeholder="Title" />
+                </div>
+
+            </div>
+
+
+
+            <!-- Author -->
+            <div class="form-group row">
+                <label for="inputAuthor" class="col-sm-2 col-form-label">Author</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputAuthor" placeholder="Author">
+                </div>
+            </div>
+            <!-- Publisher -->
+            <div class="form-group row">
+                    <label for="inputPublisher" class="col-sm-2 col-form-label">Publisher</label>
+                    <div class="col-sm-10">
+                        <select id="inputPublisher" class="form-control">
+                            <option selected> </option>
+                            <option>B & W Publishing</option>
+                            <option>A. C. McClurg</option>
+                            <option>Arkham House</option>
+                            <option>Atlantic Books</option>
+                            <option>Dobson Books</option>
+                            <option>Godwit Press</option>
+                        </select>
+    
+                    </div>
+                </div>
+            <!--Year-->
+            <div class="form-group row">
+                <label for="inputYear" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+                    <select id="inputYear" class="form-control">
+                        <option selected>Choose year...</option>
+                        <option>1900</option>
+                        <option>1901</option>
+                        <option>1902</option>
+                        <option>1903</option>
+                        <option>1904</option>
+                        <option>1905</option>
+                        <option>1906</option>
+                        <option>1907</option>
+                        <option>1908</option>
+                        <option>1909</option>
+                        <option>1910</option>
+                        <option>1911</option>
+                        <option>1912</option>
+                        <option>1913</option>
+                        <option>1914</option>
+                        <option>1915</option>
+                        <option>1916</option>
+                        <option>1917</option>
+                        <option>1918</option>
+                        <option>1919</option>
+                        <option>1920</option>
+                        <option>1921</option>
+                        <option>1922</option>
+                        <option>1923</option>
+                        <option>1924</option>
+                        <option>1925</option>
+                        <option>1926</option>
+                        <option>1927</option>
+                        <option>1928</option>
+                        <option>1929</option>
+                        <option>1930</option>
+                        <option>1931</option>
+                        <option>1932</option>
+                        <option>1933</option>
+                        <option>1934</option>
+                        <option>1935</option>
+                        <option>1936</option>
+                        <option>1937</option>
+                        <option>1938</option>
+                        <option>1939</option>
+                        <option>1940</option>
+                        <option>1941</option>
+                        <option>1942</option>
+                        <option>1943</option>
+                        <option>1944</option>
+                        <option>1945</option>
+                        <option>1946</option>
+                        <option>1947</option>
+                        <option>1948</option>
+                        <option>1949</option>
+                        <option>1950</option>
+                        <option>1951</option>
+                        <option>1952</option>
+                        <option>1953</option>
+                        <option>1954</option>
+                        <option>1955</option>
+                        <option>1956</option>
+                        <option>1957</option>
+                        <option>1958</option>
+                        <option>1959</option>
+                        <option>1960</option>
+                        <option>1961</option>
+                        <option>1962</option>
+                        <option>1963</option>
+                        <option>1964</option>
+                        <option>1965</option>
+                        <option>1966</option>
+                        <option>1967</option>
+                        <option>1968</option>
+                        <option>1969</option>
+                        <option>1970</option>
+                        <option>1971</option>
+                        <option>1972</option>
+                        <option>1973</option>
+                        <option>1974</option>
+                        <option>1975</option>
+                        <option>1976</option>
+                        <option>1977</option>
+                        <option>1978</option>
+                        <option>1979</option>
+                        <option>1980</option>
+                        <option>1981</option>
+                        <option>1982</option>
+                        <option>1983</option>
+                        <option>1984</option>
+                        <option>1985</option>
+                        <option>1986</option>
+                        <option>1987</option>
+                        <option>1988</option>
+                        <option>1989</option>
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                        <option>1993</option>
+                        <option>1994</option>
+                        <option>1995</option>
+                        <option>1996</option>
+                        <option>1997</option>
+                        <option>1998</option>
+                        <option>1999</option>
+                        <option>2000</option>
+                        <option>2001</option>
+                        <option>2002</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option>
+                        <option>2008</option>
+                        <option>2009</option>
+                        <option>2010</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Page length only numbers -->
+            <div class="form-group row">
+                <label for="inputPages" class="col-sm-2 col-form-label">Pages</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control noEnterSubmit" id="inputPages" placeholder="Pages" min="1" max="1000">
+                </div>
+            </div>
+            <!-- Series -->
+            <div class="form-group row">
+                <label for="inputSeries" class="col-sm-2 col-form-label">Series</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputSeries" placeholder="Series">
+                </div>
+            </div>
+            <!-- Series Number -->
+            <div class="form-group row">
+                <label for="inputSeriesNumber" class="col-sm-2 col-form-label">Number</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control noEnterSubmit" id="inputSeriesNumber" placeholder="Series Number">
+                </div>
+            </div>
+            <!-- ISBN -->
+            <div class="form-group row">
+                <label for="inputIsbn" class="col-sm-2 col-form-label">ISBN</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputISBN" maxlength="13" placeholder="ISBN" pattern="[0-9]">
+                </div>
+            </div>
+
+            <!-- Review -->
+            <div class="form-group row">
+                <label for="inputReview" class="col-sm-2 col-form-label">Review</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputReview" placeholder="Review" style="height:150px">
+                </div>
+            </div>
+
+
+            <p class="message"></p>
+            <button type="submit" class="btn btn-primary" id="savenovel">Save Novel</button>
+            <button id="cancelN" class="btn cancel">Cancel</button>
+
+
+        </fieldset>
+
+
+
+        <!-- ANTHOLOGy -->
+        <fieldset class="form-group hidden" id="form-anthology">
+
+            <!-- Title -->
+            <div class="form-group row">
+                <label for="inputTitleAnth" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputTitleAnth" placeholder="Title">
+                </div>
+            </div>
+
+            <!-- Editor -->
+            <div class="form-group row">
+                <label for="inputEditor" class="col-sm-2 col-form-label">Editor</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputEditor" placeholder="Editor">
+                </div>
+            </div>
+
+            <!--Publisher-->
+            <div class="form-group row">
+                <label for="inputPublisherAnth" class="col-sm-2 col-form-label">Publisher</label>
+                <div class="col-sm-10">
+                    <select id="inputPublisherAnth" class="form-control">
+                        <option selected> </option>
+                        <option>B & W Publishing</option>
+                        <option>A. C. McClurg</option>
+                        <option>Arkham House</option>
+                        <option>Atlantic Books</option>
+                        <option>Dobson Books</option>
+                        <option>Godwit Press</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!--Year-->
+            <div class="form-group row">
+                <label for="inputYearAnth" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+                    <select id="inputYearAnth" class="form-control">
+                        <option selected> </option>
+                        <option>1900</option>
+                        <option>1901</option>
+                        <option>1902</option>
+                        <option>1903</option>
+                        <option>1904</option>
+                        <option>1905</option>
+                        <option>1906</option>
+                        <option>1907</option>
+                        <option>1908</option>
+                        <option>1909</option>
+                        <option>1910</option>
+                        <option>1911</option>
+                        <option>1912</option>
+                        <option>1913</option>
+                        <option>1914</option>
+                        <option>1915</option>
+                        <option>1916</option>
+                        <option>1917</option>
+                        <option>1918</option>
+                        <option>1919</option>
+                        <option>1920</option>
+                        <option>1921</option>
+                        <option>1922</option>
+                        <option>1923</option>
+                        <option>1924</option>
+                        <option>1925</option>
+                        <option>1926</option>
+                        <option>1927</option>
+                        <option>1928</option>
+                        <option>1929</option>
+                        <option>1930</option>
+                        <option>1931</option>
+                        <option>1932</option>
+                        <option>1933</option>
+                        <option>1934</option>
+                        <option>1935</option>
+                        <option>1936</option>
+                        <option>1937</option>
+                        <option>1938</option>
+                        <option>1939</option>
+                        <option>1940</option>
+                        <option>1941</option>
+                        <option>1942</option>
+                        <option>1943</option>
+                        <option>1944</option>
+                        <option>1945</option>
+                        <option>1946</option>
+                        <option>1947</option>
+                        <option>1948</option>
+                        <option>1949</option>
+                        <option>1950</option>
+                        <option>1951</option>
+                        <option>1952</option>
+                        <option>1953</option>
+                        <option>1954</option>
+                        <option>1955</option>
+                        <option>1956</option>
+                        <option>1957</option>
+                        <option>1958</option>
+                        <option>1959</option>
+                        <option>1960</option>
+                        <option>1961</option>
+                        <option>1962</option>
+                        <option>1963</option>
+                        <option>1964</option>
+                        <option>1965</option>
+                        <option>1966</option>
+                        <option>1967</option>
+                        <option>1968</option>
+                        <option>1969</option>
+                        <option>1970</option>
+                        <option>1971</option>
+                        <option>1972</option>
+                        <option>1973</option>
+                        <option>1974</option>
+                        <option>1975</option>
+                        <option>1976</option>
+                        <option>1977</option>
+                        <option>1978</option>
+                        <option>1979</option>
+                        <option>1980</option>
+                        <option>1981</option>
+                        <option>1982</option>
+                        <option>1983</option>
+                        <option>1984</option>
+                        <option>1985</option>
+                        <option>1986</option>
+                        <option>1987</option>
+                        <option>1988</option>
+                        <option>1989</option>
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                        <option>1993</option>
+                        <option>1994</option>
+                        <option>1995</option>
+                        <option>1996</option>
+                        <option>1997</option>
+                        <option>1998</option>
+                        <option>1999</option>
+                        <option>2000</option>
+                        <option>2001</option>
+                        <option>2002</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option>
+                        <option>2008</option>
+                        <option>2009</option>
+                        <option>2010</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Page length only numbers -->
+            <div class="form-group row">
+                <label for="inputPageLengthAnth" class="col-sm-2 col-form-label">Pages</label>
+                <div class="col-sm-10">
+                    <input type="number" value="" class="form-control noEnterSubmit" id="inputPageLengthAnth" placeholder="Page Length" min="1"
+                        max="1000">
+                </div>
+            </div>
+
+
+            <!-- Stories -->
+            <div class="offset-sm-2">
+                <button type="button" class="btn btn-primary " id="addStory"> Add Story</button>
+                <div id="story" class="hidden">
+                    <ul class="offset-sm-2" id="story_display"></ul>
+                    <!-- Title -->
+                    <div class="form-group row">
+                        <label for="inputTitleStory" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control noEnterSubmit" id="inputTitleStory" placeholder="Title" required>
+                        </div>
+                    </div>
+                    <!-- Author -->
+                    <div class="form-group row">
+                        <label for="inputAuthorStory" class="col-sm-2 col-form-label">Author</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control noEnterSubmit" id="inputAuthorStory" placeholder="Author" required>
+                        </div>
+                    </div>
+
+                    <!--Story auth-->
+
+                    <div class="row offset-sm-2 ">
+
+                        <div class="col-sm-1">
+                            <input type="checkbox" id="storyOrig" name="checkBox" value="original">
+                        </div>
+                        <label for="storyOrig" class=" col-sm-9">The story is original</label>
+
+                    </div>
+
+                    <p class="message"></p>
+                    <button type="button" class="btn btn-primary " id="saveStory"> Save Story</button>
+                    <button id="cancelS" class="btn cancel">Cancel</button>
+
+
+
+
+                </div>
+            </div>
+
+            <!-- ISBN -->
+            <div class="form-group row">
+                <label for="inputIsbnAnth" class="col-sm-2 col-form-label">ISBN</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputISBNAnth" maxlength="13" placeholder="ISBN" pattern="[0-9]"
+                    />
+                </div>
+            </div>
+
+            <!-- Review -->
+            <div class="form-group row">
+                <label for="inputReviewAnth" class="col-sm-2 col-form-label">Review</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control noEnterSubmit" id="inputReviewAnth" placeholder="Review" style="height:150px">
+                </div>
+            </div>
+
+
+            <p class="message"></p>
+            <button type="submit" class="btn btn-primary " id="saveAnth"> Save Anthology</button>
+            <button id="cancelA" class="btn cancel">Cancel</button>
+
+
+
+
+        </fieldset>
+    </form>
+    
+    <div id="novels" class="hidden">
+        <input id="search" placeholder="type to search...">
+        <select id='mySelector' class="styled-select slate">
+                <option value="">Please Select</option>
+                <option value='1'>A</option>
+                <option value='2'>B</option>
+                <option value='3'>C</option>
+              </select>
+        <br><br>
+
+        <table id="novelsT"  class=" filterable table table-striped table-inverse table-bordered table-hover">
+            <thead><tr>
+                <th>
+                    <a href="" id="sort_id">ID</a>
+                </th>
+                <th>
+                    <a href="" id="sort_title">Title</a>
+                </th>
+                <th>
+                    <a href="" class="sort_author">Author</a>
+                </th>
+                <th>
+                    <a href="" class="sort_publisher">Published</a>
+                </th>
+                
+                <th>
+                    <a href="" class="sort_length">Length</a>
+                </th>
+                <th>
+                    <a href="" class="sort_aditional">Series</a>
+                </th>
+                
+                <th>
+                    <a href="" class="sort_isbn">ISBN</a>
+                </th>
+                <th>Review</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+
+            <tbody id="BookList" class="bookT">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="anthologies" class="hidden">
+        <table>
+            <thead>
+                <th>
+                    <a href="" class="sort_id">ID</a>
+                </th>
+                <th>
+                    <a href="" class="sort_title">Title</a>
+                </th>
+                <th>
+                    <a href="" class="sort_author">Editor</a>
+                </th>
+                <th>
+                    <a href="" class="sort_publisher">Published</a>
+                </th>
+                
+                <th>
+                    <a href="" class="sort_length">Length</a>
+                </th>
+                <th>
+                    <a href="" class="sort_aditional">Stories</a>
+                </th>
+                <th>
+                    <a href="" class="sort_isbn">ISBN</a>
+                </th>
+                <th>Review</th>
+                <th>Delete</th>
+            </thead>
+            <tbody id="BookListAnth" class="bookT">
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="books" class="hidden">
+           
+        <table>
+            <thead> 
+                <th>
+                    <a href="" class="sort_id">ID</a>
+                </th>
+                <th>
+                    <a href="" class="sort_title">Title</a>
+                </th>
+                <th>
+                    <a href="" class="sort_author">Editor</a>
+                </th>
+                <th>
+                    <a href="" class="sort_publisher">Published</a>
+                </th>
+                
+                <th>
+                    <a href="" class="sort_length">Length</a>
+                </th>
+                <th>
+                    <a href="" class="sort_aditional">Stories</a>
+                </th>
+                <th>
+                    <a href="" class="sort_isbn">ISBN</a>
+                </th>
+                <th>Review</th>
+            </thead>
+            <tbody id="BookListB">
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script src="node_modules\jquery\dist\jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+
+
+function Novels(title, author, publisher, year, pages, series, snumber, isbn, review) {
+    this.title = title;
+    this.author = author;
+    this.publisher = publisher;
+    this.year = year;
+    this.pages = pages;
+    this.series = series;
+    this.snumber = snumber;
+    this.isbn = isbn;
+    this.review = review;
+}
+
+function Story(title, author) {
+    this.title = title;
+    this.story = story;
+}
+
+function Anthology(title, editor, publisher, year, pages, stories, isbn, review) {
+    this.title = title;
+    this.editor = editor;
+    this.publisher = publisher;
+    this.year = year;
+    this.pages = pages;
+    this.stories = stories;
+    this.isbn = isbn;
+    this.review = review;
+
+}
+
+let novels = [];
+let anthologies = [];
+let stories = [];
+let order = 0;
+let orderA = 0;
+
+
+
+function controlInput(title, author, publisher, year, pages, series, snumber, isbn, review) {
+   
+
+    pages = parseInt(pages);
+    if ((pages < 1 || pages > 1000) && pages != NaN) {
+        alert("Number of pages must be between 1 and 1000");
+        return false;
+    }
+
+    if (pages === NaN) {
+        pages = "";
+        return pages;
+    }
+
+    if (isbn.length != 13 || isbn == "") {
+        alert("ISBN bust be 13 digits!");
+        return false;
+    }
+}
+
+function controlInputAnth(title, editor, publisher, year, pages, stories, isbn, review) {
+   
+
+    pages = parseInt(pages);
+
+    if ((pages < 1 || pages > 1000) && pages != NaN) {
+        alert("Number of pages must be between 1 and 1000");
+        return false;
+    }
+
+    if (pages == NaN) {
+        pages = "";
+        return pages;
+    }
+
+    if (isbn.length != 13 || isbn == "") {
+        alert("ISBN bust be 13 digits!");
+        return false;
+    }
+}
+
+let newNovel = (() => {
+    order++;
+    $('#BookList').append(`
+        <tr>
+        <th scope="row">${order}</th>
+        <td>${novels[novels.length - 1].title}</td>
+        <td>${novels[novels.length - 1].author}</td>
+        <td>${novels[novels.length - 1].publisher}</td>
+        <td>${novels[novels.length - 1].year}</td>
+        <td>${novels[novels.length - 1].pages}</td>
+        <td>${novels[novels.length - 1].series}</td>
+        <td>${novels[novels.length - 1].snumber}</td>
+        <td>${novels[novels.length - 1].isbn}</td>
+        <td>${novels[novels.length - 1].review}</td>
+
+        </tr>
+    `);
+})
+
+let newAnthology = (() => {
+    orderA++;
+    $('#BookListA').append(`
+        <tr>
+            <th scope="row">${orderA}</th>
+            <td>${anthologies[anthologies.length - 1].title}</td>
+            <td>${anthologies[anthologies.length - 1].editor}</td>
+            <td>${anthologies[anthologies.length - 1].publisher}</td>
+            <td>${anthologies[anthologies.length - 1].year}</td>
+            <td>${anthologies[anthologies.length - 1].pages}</td>
+            <td>${anthologies[anthologies.length - 1].stories}</td>
+            <td>${anthologies[anthologies.length - 1].isbn}</td>
+            <td>${anthologies[anthologies.length - 1].review}</td>
+         
+        </tr>
+    `);
+
+})
+
+$(document).ready(function () {
+
+    // Display Input Form
+    $('#newBtn').click(() => {
+        $('#inputForm').removeClass('hidden')
+
+    })
+
+    // Disabled enter on input forms
+    $('.noEnterSubmit').keypress(function (e) {
+        if (e.which == 13)
+            return false;
+        //or
+        if (e.which == 13)
+            e.preventDefault();
+    })
+
+    // Input form for anthologies
+    $('input:radio[name="gridRadios"]').change(function () {
+        if ($(this).val() == "ant") {
+            $('#form-novel').addClass('hidden');
+            $('#form-anthology').removeClass('hidden');
+        }
+
+        if ($(this).val() == "novel") {
+            $('#form-novel').removeClass('hidden');
+            $('#form-anthology').addClass('hidden');
+        }
+    })
+
+  
+   
+
+
+    $("#addStory").click((e) => {
+        e.preventDefault();
+
+        $('#story').removeClass('hidden');
+    })
+
+    $('#saveStory').click((e) => {
+        e.preventDefault();
+
+        titleS = ('#inputTitleStory').val();
+        authorS = ('#inputAuthorStory').val();
+
+        if (titleS == "" && authorS == "") {
+            $('#inputTitleStory').addClass('unfilled');
+            $('#inputTitleStory').attr('placeholder', 'Please enter Title of the Story');
+            $('#inputAuthorStory').addClass('unfilled');
+            $('#inputAuthorStory').attr('placeholder', 'Please enter Author of the Story');
+
+        } else {
+            stories.push(new Story(titleS, authorS));
+
+            $('#inputTitleStory').removeClass('unfilled');
+            $('#inputAuthorStory').removeClass('unfilled');
+            $('#inputTitleStory').val("");
+            $('#inputAuthorStory').val("");
+
+        }
+
+    })
+
+    $('#savenovel').click((e) => {
+        e.preventDefault();
+
+        let title = ("#inputTitle").val();
+        let author = ("#inputAuthor").val();
+        let publisher = ("#inputPublisher").val();
+        let year = ("#inputYear").val();
+        let pages = ("#inputPages").val();
+        let series = ("#inputSeries").val();
+        let snumber = ("#inputSeriesNumber").val();
+        let isbn = ("#inputISBN").val();
+        let review = ("#inputReview").val();
+
+        controlInput(title, author, publisher, year, pages, series, snumber, isbn, review);
+
+        novels.push(new Novels(title, author, publisher, year, pages, series, snumber, isbn, review));
+        newNovel();
+
+
+    });
+
+    $('#saveAnth').click((e) => {
+        e.preventDefault();
+
+        let title = $('#inputTitleAnth').val();
+        let editor = $('#inputEditor').val();
+        let publisher = $('#inputPublisherAnth').val();
+        let year = $('inputYearAnth').val();
+        let pages = $('#inputPageLengthAnth').val();
+        let storiesA = stories;
+        let isbn = $('#inputISBNAnth').val();
+        let review = $('#inputReviewAnth').val();
+
+        controlInputAnth(title, editor, publisher, year, pages, storiesA, isbn, review);
+
+        anthologies.push(new Anthology(title, editor, publisher, year, pages, storiesA, isbn, review))
+        newAnthology();
+
+
+    });
+
+    $('#listOfAllBooks').click((e) => {
+        e.preventDefault();
+        $('#booklist').removeClass('hidden');
+        $('#listOfBooks').removeClass('hidden')
+        $('#inputForm').addClass('hidden')
+        // $notFound.removeClass('hidden');
+
+
+    })
+    $('#showNovels').click((e) => {
+        e.preventDefault();
+        $('#novels').removeClass('hidden');
+        $('#anthologies').addClass('hidden');
+
+    });
+    
+    $('#showAnthologies').click((e) => {
+        e.preventDefault();
+        $('#anthologies').removeClass('hidden');
+        $('#novels').addClass('hidden');
+
+    });
+
+    $('#newBookBtn').click((e) => {
+        e.preventDefault();
+        $('#inputForm').addClass('hidden');
+        $('#booklist').addClass('hidden');
+        $('#novels').addClass('hidden');
+
+    })
+
+});
+
