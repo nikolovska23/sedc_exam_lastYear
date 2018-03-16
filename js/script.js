@@ -18,14 +18,14 @@ function Story(title, author, original) {
     this.original = original;
 }
 
-function Anthology(title, editor, publisher, year, pages, stories,originalS, isbn, review) {
+function Anthology(title, editor, publisher, year, pages, stories, originalS, isbn, review) {
     this.title = title;
     this.editor = editor;
     this.publisher = publisher;
     this.year = year;
     this.pages = pages;
     this.stories = stories;
-    this.originalS=originalS;
+    this.originalS = originalS;
     this.isbn = isbn;
     this.review = review;
 
@@ -138,22 +138,22 @@ $("#searchInput").keyup(function () {
 // });
 
 // $("#sort_title").click(()=>{
-   
+
 //  let table= $('#novelsT').DataTable();
 
 //     table.order( [ 1, 'asc' ] ).draw();
-    
- 
+
+
 // });
 
 
 // $("#sort_title").click(()=>{
 //     $('#novelsT').DataTable({
-   
+
 //     "aaSorting": [[ 1, 'asc' ]],
 //     "iDisplayLength": 10,
 //     })
-    
+
 //    });
 
 // $("#sort_title").click(()=>{
@@ -228,7 +228,7 @@ function controlInputAnth(title, editor, publisher, year, pages, stories, isbn, 
         $(".message").append(`<span>An anthology must have at least two stories</span><br>`);
         f = 0;
     }
-       
+
 
 
     if (isbn != "" && isbn != undefined) {
@@ -281,53 +281,88 @@ function refresh() {
 }
 
 // Checks if number of stories ends with 1
-function endOne(num){
-    if(num%10==1)
-    return num + " story";
-    else 
-    return num + " stories";
-}
-
-function ifOriginal(original){
-    if(original!= 0)
-    return `( ${original}  original stories)`;
+function endOne(num) {
+    if (num % 10 == 1)
+        return num + " story";
     else
-    return ``;
+        return num + " stories";
 }
 
- // CONVERT NUMBERS TO ROMAN NUMERALS
- function convertToRoman(num) {
-    let decimalValue = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-    let romanNumeral = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
-    let romanized = '';
-    for (let index = 0; index < decimalValue.length; index++) {
-        while (decimalValue[index] <= num) {
-            romanized += romanNumeral[index];
-            num -= decimalValue[index];
-        }
-    }
-    return romanized;
+function ifOriginal(original) {
+    if (original != 0)
+        return `( ${original}  original stories)`;
+    else
+        return ``;
 }
+
+// CONVERT NUMBERS TO ROMAN NUMERALS
+function convertToRoman(num) {
+    if (num != "") {
+        let decimalValue = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        let romanNumeral = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
+        let romanized = '';
+        for (let index = 0; index < decimalValue.length; index++) {
+            while (decimalValue[index] <= num) {
+                romanized += romanNumeral[index];
+                num -= decimalValue[index];
+            }
+        }
+        return `(${romanized})`;
+    }
+    else return ` `;
+}
+
+// Generates year 
+(() => {
+    let from = 1900;
+    let to = new Date().getFullYear();
+    let options = "";
+    for (let year = from; year <= to; year++) {
+        options += "<option>" + year + "</option>";
+    }
+    $("#inputYear").append(options);
+
+    $("#inputYearAnth").append(options);
+})();
+
+//Publisher predefined list
+
+let publishers = [
+    "B & W Publishing",
+    "A. C. McClurg",
+    "Arkham House",
+    "Atlantic Books",
+    "Dobson Books",
+    "Godwit Press"
+]
+
+$.each(publishers, function (i, p) {
+    $('#inputPublisher').append($('<option></option>').html(p));
+    $('#inputPublisherAnth').append($('<option></option>').html(p));
+});
+
+
+
 
 let newNovel = (() => {
+
     order++;
-    console.log(convertToRoman(novels[novels.length - 1].snumber));
+
     $('#BookList').append(`
         <tr>
         <th scope="row">${order}</th>
         <td id="title">${novels[novels.length - 1].title}</td>
         <td>${novels[novels.length - 1].author}</td>
-        <td>${novels[novels.length - 1].year}  (${novels[novels.length - 1].publisher})</td>
+        <td>${novels[novels.length - 1].year}    ${novels[novels.length - 1].publisher}</td>
         <td>${novels[novels.length - 1].pages}</td>
-        <td>${novels[novels.length - 1].series} (
-            
-            ${convertToRoman(novels[novels.length - 1].snumber)})</td>
-        
+        <td>${novels[novels.length - 1].series} 
+            ${convertToRoman(novels[novels.length - 1].snumber)}</td>
         <td>${novels[novels.length - 1].isbn}</td>
         <td>${novels[novels.length - 1].review}</td>
         <td><button class="deleteBtn"> Delete </button></td>
         </tr>
     `);
+});
 
 
 
@@ -345,10 +380,7 @@ let newAnthology = (() => {
            <td>${endOne(anthologies[anthologies.length - 1].stories.length)}
            
                ${ifOriginal(anthologies[anthologies.length - 1].originalS)} </td>
-           
-             
-             
-                
+            
             
             <td>${anthologies[anthologies.length - 1].isbn}</td>
             <td>${anthologies[anthologies.length - 1].review}</td>
@@ -435,15 +467,15 @@ $(document).ready(function () {
 
         if (controlInputSt(title, author)) {
             stories.push(new Story(title, author, original));
-            console.log(stories[stories.length-1].original);
-            
+            console.log(stories[stories.length - 1].original);
+
 
 
             $("#story_display").append(`<li>${stories[stories.length - 1].title}</li>`);
 
             $('#inputTitleStory').val("");
             $('#inputAuthorStory').val("");
-            $('#storyOrig').prop( "checked", false );
+            $('#storyOrig').prop("checked", false);
             //or $('#storyOrig').removeAttr('checked');
         }
 
@@ -492,21 +524,21 @@ $(document).ready(function () {
         let year = $('#inputYearAnth').val();
         let pages = $('#inputPageLengthAnth').val();
         let storiesA = stories;
-        let storiesO=0;
+        let storiesO = 0;
         let isbn = $('#inputISBNAnth').val();
         let review = $('#inputReviewAnth').val();
 
         if (controlInputAnth(title, editor, publisher, year, pages, storiesA, isbn, review)) {
-            
 
-            storiesA.forEach(story => { 
-                if(story.original)
-                storiesO++;
-                return storiesO;      
+
+            storiesA.forEach(story => {
+                if (story.original)
+                    storiesO++;
+                return storiesO;
             });
-            
 
-            anthologies.push(new Anthology(title, editor, publisher, year, pages, storiesA,storiesO, isbn, review));
+
+            anthologies.push(new Anthology(title, editor, publisher, year, pages, storiesA, storiesO, isbn, review));
 
             newAnthology();
 
@@ -542,7 +574,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('#novels').removeClass('hidden');
         $('#anthologies').addClass('hidden');
-        
+
 
 
     });
@@ -551,7 +583,7 @@ $(document).ready(function () {
         e.preventDefault();
         $('#anthologies').removeClass('hidden');
         $('#novels').addClass('hidden');
-        
+
 
     });
 
@@ -561,7 +593,7 @@ $(document).ready(function () {
         $('#listOfBooks').addClass('hidden');
         $('#booklist').addClass('hidden');
         $('#novels').addClass('hidden');
-       
+
 
     })
 
@@ -576,15 +608,14 @@ $(document).ready(function () {
     });
 
     // DELETE ROW FROM TABLE
-      $('.bookT').on('click', '.deleteBtn', function() {
+    $('.bookT').on('click', '.deleteBtn', function () {
         let choice = confirm('Do you really wanna delete this one?');
         if (choice === true) {
             return $(this).closest('tr').remove();
         }
         return false;
-      });
-      
-      
+    });
+
+
 
 });
-
