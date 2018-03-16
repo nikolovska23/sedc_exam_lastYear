@@ -341,6 +341,24 @@ $.each(publishers, function (i, p) {
     $('#inputPublisherAnth').append($('<option></option>').html(p));
 });
 
+//Review Text
+function ReviewText (text){
+    let RText = '';
+    
+    if (text.length > 50) {
+        for (let i = 0; i < 50; i++) {
+            RText += text[i];
+        }
+        for (let i = RText.length - 1; i >= 0; i--) {
+            if (RText[i] === " ") {
+                RText = RText.slice(0, i);
+                return RText + "...";
+            }
+        }
+    } else
+        return text;
+};
+
 
 
 
@@ -358,7 +376,7 @@ let newNovel = (() => {
         <td>${novels[novels.length - 1].series} 
             ${convertToRoman(novels[novels.length - 1].snumber)}</td>
         <td>${novels[novels.length - 1].isbn}</td>
-        <td>${novels[novels.length - 1].review}</td>
+        <td>${ReviewText(novels[novels.length - 1].review)}</td>
         <td><button class="deleteBtn"> Delete </button></td>
         </tr>
     `);
@@ -383,7 +401,7 @@ let newAnthology = (() => {
             
             
             <td>${anthologies[anthologies.length - 1].isbn}</td>
-            <td>${anthologies[anthologies.length - 1].review}</td>
+            <td>${ReviewText(anthologies[anthologies.length - 1].review)}</td>
             <td><button class="deleteBtn"> Delete </button></td>
          
         </tr>
