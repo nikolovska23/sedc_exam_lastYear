@@ -281,7 +281,7 @@ function refresh() {
 }
 
 // Checks if number of stories ends with 1
-function endOne(num) {
+function endsOne(num) {
     if (num % 10 == 1)
         return num + " story";
     else
@@ -295,7 +295,7 @@ function ifOriginal(original) {
         return ``;
 }
 
-// CONVERT NUMBERS TO ROMAN NUMERALS
+// CONVERTS NUMBERS TO ROMAN NUMERALS
 function convertToRoman(num) {
     if (num != "") {
         let decimalValue = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
@@ -360,6 +360,31 @@ function ReviewText (text){
 };
 
 
+function storiesOutput(stories) {
+    
+        let a = 0;
+        let f = false;
+        for (let i = 0; i < stories.length; i++) {
+            if (stories[0].author !== stories[i].author)
+                break;
+            else if (i === stories.length - 1)
+                f = true;
+        }
+        if (f) {
+            return `${endsOne(stories.length)} by ${stories[0].author}`;
+        } else {
+            let authorsSet = new Set();
+            stories.forEach(story => {
+                authorsSet.add(story.author)
+            });
+
+            //console.log(authorsSet);
+
+            return `${endsOne(stories.length)} by ${authorsSet.size}  authors`;
+        }
+};
+
+
 
 
 let newNovel = (() => {
@@ -395,7 +420,7 @@ let newAnthology = (() => {
            
             <td>${anthologies[anthologies.length - 1].year}  ${anthologies[anthologies.length - 1].publisher}</td>
             <td>${anthologies[anthologies.length - 1].pages}</td>
-           <td>${endOne(anthologies[anthologies.length - 1].stories.length)}
+           <td>${storiesOutput(anthologies[anthologies.length - 1].stories)}
            
                ${ifOriginal(anthologies[anthologies.length - 1].originalS)} </td>
             
